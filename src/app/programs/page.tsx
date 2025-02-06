@@ -3,23 +3,13 @@ import { ProgramCard } from "@/components/program-card"
 import { ProgramSearch } from "@/components/program-search"
 import { getPrograms } from "@/app/actions"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
 import { isUserAdmin } from "@/lib/clerk-actions"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 
 export default async function ProgramsPage() {
   const programs = await getPrograms()
-
-  const [isAdmin, setIsAdmin] = useState(false)
-
-  useEffect(() => {
-    const checkAdminStatus = async () => {
-      const adminStatus = await isUserAdmin()
-      setIsAdmin(adminStatus)
-    }
-    checkAdminStatus()
-  }, [])
+  const isAdmin = await isUserAdmin()
 
   if (!isAdmin) return (
     <Card>
