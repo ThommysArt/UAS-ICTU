@@ -5,21 +5,6 @@ import { prisma } from "@/lib/prisma"
 import { ensureUserInDatabase } from "@/lib/clerk-actions"
 import { isUserAdmin } from "@/lib/clerk-actions"
 
-// Fake data
-const fakePrograms = [
-  { id: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6", code: "CS101", name: "Computer Science", duration: 4, department: "Engineering" },
-  { id: "b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7", code: "BUS201", name: "Business Administration", duration: 3, department: "Business" },
-  { id: "c3d4e5f6-g7h8-9i0j-1k2l-m3n4o5p6q7r8", code: "ENG301", name: "English Literature", duration: 4, department: "Arts" },
-  { id: "d4e5f6g7-h8i9-0j1k-2l3m-n4o5p6q7r8s9", code: "BIO401", name: "Biology", duration: 4, department: "Science" },
-  { id: "e5f6g7h8-i9j0-1k2l-3m4n-o5p6q7r8s9t0", code: "MATH501", name: "Mathematics", duration: 3, department: "Science" },
-  { id: "f6g7h8i9-j0k1-2l3m-4n5o-p6q7r8s9t0u1", code: "HIST601", name: "History", duration: 3, department: "Arts" },
-  { id: "g7h8i9j0-k1l2-3m4n-5o6p-q7r8s9t0u1v2", code: "PSYCH701", name: "Psychology", duration: 4, department: "Social Sciences" },
-  { id: "h8i9j0k1-l2m3-4n5o-6p7q-r8s9t0u1v2w3", code: "ECON801", name: "Economics", duration: 3, department: "Business" },
-  { id: "i9j0k1l2-m3n4-5o6p-7q8r-s9t0u1v2w3x4", code: "PHYS901", name: "Physics", duration: 4, department: "Science" },
-  { id: "j0k1l2m3-n4o5-6p7q-8r9s-t0u1v2w3x4y5", code: "ART1001", name: "Fine Arts", duration: 4, department: "Arts" },
-]
-
-const fakeApplicationStatuses = ["PENDING", "ACCEPTED", "REJECTED"]
 
 const fakeNotifications = [
   "Your application for Computer Science has been received.",
@@ -61,7 +46,7 @@ export async function updateUserProfile(formData: FormData) {
 // Program actions
 export async function getPrograms() {
   const realPrograms = await prisma.program.findMany()
-  return [...fakePrograms, ...realPrograms]
+  return realPrograms
 }
 
 export async function getProgram(programId: string) {
